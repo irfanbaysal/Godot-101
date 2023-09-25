@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Sprites/GodotController.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ProgressBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ProgressBar.gd" type="Script" id=4]
-[ext_resource path="res://Collectable.tscn" type="PackedScene" id=5]
 [ext_resource path="res://CollectableManager.tscn" type="PackedScene" id=6]
 
 [node name="Node" type="Node"]
@@ -22,9 +21,6 @@ margin_right = 985.0
 margin_bottom = 65.0
 script = ExtResource( 4 )
 
-[node name="Collectable" parent="." instance=ExtResource( 5 )]
-position = Vector2( 766, 434 )
-
 [node name="CollectableManager" parent="." instance=ExtResource( 6 )]
 position = Vector2( 0, 1 )
 
@@ -32,6 +28,4 @@ position = Vector2( 0, 1 )
 position = Vector2( 522, 269 )
 
 [connection signal="pressed" from="Button" to="CollectableManager/Godot" method="_on_Button_pressed"]
-[connection signal="collected" from="Collectable" to="CollectableManager" method="_on_Collectable_collected"]
-[connection signal="collected" from="Collectable" to="CollectableManager/Godot" method="_on_Collectable_collected"]
 [connection signal="timer_applied" from="CollectableManager/Godot" to="ProgressBar" method="_on_Godot_timer_applied"]

@@ -7,6 +7,7 @@ var godot
 
 func _ready():
 	_set_godot()
+	_create_collectable()
 
 func _create_collectable():
 	new_ball = Collectable.instance()
