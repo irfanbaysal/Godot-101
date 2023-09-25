@@ -3,17 +3,10 @@ extends Sprite
 var angular_speed = PI;
 var speed = 400.0
 
-#public = export
-export var testString : String
-#public = export 
-export var hp:= 64.0
-#public = export
-export(String, MULTILINE) var multilineText : String
-#public = export
-export var testInt: int
-#const
-const TESTCONSTINT = 35
-
+export var progressValueIncrementer : int
+export var followSpeed : int
+var progressedValue = 0	
+signal timer_applied(progressed_value)
 # Awake
 func _init():
 	print_debug("Init")
@@ -52,23 +45,16 @@ func _applyInput(delta):
 #	if event is InputEventMouseMotion:
 #		position = get_viewport().get_mouse_position()
 		
-export var followSpeed : int
+
 func _physics_process(delta):
 	var mouse_pos = get_viewport().get_mouse_position()
 	position = position.linear_interpolate(mouse_pos, delta * followSpeed)
 	
-
 func _on_Button_pressed():
 	_refresh_progress_bar()
 	
-
 func _refresh_progress_bar():
 	progressedValue=0
-
-export var progressValueIncrementer : int
-var progressedValue = 0	
-signal timer_applied(progressed_value)
-
 	
 func _useTimer():
 	var timer = get_node("Timer")
@@ -77,7 +63,24 @@ func _useTimer():
 func _on_apply_timeout():
 	progressedValue+=progressValueIncrementer
 	emit_signal("timer_applied",progressedValue)
-	
+	_set_alpha()
+
 func _on_Collectable_collected(progressed_value):
 	progressedValue += progressed_value
+	_set_alpha()
+	_scale_up_down()
+	
+func _set_alpha():
+	var alpha = 1.0 - (progressedValue/100.0)
+	alpha = clamp(alpha,0.0,1.0)
+	modulate.a = alpha
+	print_debug(modulate.a)
+	
+func _scale_up_down():
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "scale", Vector2(1.5,1.5), .25)
+	tween.tween_interval(.15)
+	tween.tween_property(self,"scale",Vector2(1,1),.25)
+	tween.set_ease(Tween.EASE_IN_OUT)
+
 	
