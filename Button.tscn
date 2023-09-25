@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="Button" type="Button"]
+margin_right = 140.0
+margin_bottom = 62.0
+text = "Toggle"

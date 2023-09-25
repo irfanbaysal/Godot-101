@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="ProgressBar" type="ProgressBar"]
+margin_left = 779.0
+margin_top = 31.0
+margin_right = 944.0
+margin_bottom = 67.0
