@@ -3,9 +3,11 @@ extends Sprite
 var angular_speed = PI;
 var speed = 400.0
 
-export var progressValueIncrementer : int
+export var progressValueIncrementer : float
+export var progressValueMultiplier : float
 export var followSpeed : int
 var progressedValue = 0	
+
 signal timer_applied(progressed_value)
 # Awake
 func _init():
@@ -61,9 +63,11 @@ func _useTimer():
 	timer.connect("timeout",self,"_on_apply_timeout")
 		
 func _on_apply_timeout():
+	progressValueIncrementer += progressValueMultiplier
 	progressedValue+=progressValueIncrementer
 	emit_signal("timer_applied",progressedValue)
 	_set_alpha()
+	print_debug(progressValueIncrementer)
 
 func _on_Collectable_collected(progressed_value):
 	progressedValue += progressed_value
@@ -74,7 +78,7 @@ func _set_alpha():
 	var alpha = 1.0 - (progressedValue/100.0)
 	alpha = clamp(alpha,0.0,1.0)
 	modulate.a = alpha
-	print_debug(modulate.a)
+
 	
 func _scale_up_down():
 	var tween = get_tree().create_tween()

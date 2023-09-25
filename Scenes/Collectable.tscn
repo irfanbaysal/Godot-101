@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Collectable.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/1082443_unity2d_unity_unity3d_logo_game engine_icon.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/dollar-symbol.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -18,5 +19,19 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Sprite"]
+z_index = -1
+amount = 15
+preprocess = 1.0
+texture = ExtResource( 3 )
+emission_shape = 2
+emission_rect_extents = Vector2( 3, 3 )
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 500.0
+scale_amount = 10.0
+scale_amount_random = 1.0
 
 [connection signal="area_entered" from="." to="." method="_on_Collectable_area_entered"]
