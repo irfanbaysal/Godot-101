@@ -27,7 +27,7 @@ position = Vector2( 0, 2 )
 [node name="Godot" parent="CollectableManager" instance=ExtResource( 4 )]
 position = Vector2( 523, 269 )
 progressValueIncrementer = 1.0
-progressValueMultiplier = 0.25
+progressValueMultiplier = 0.005
 
 [connection signal="pressed" from="Button" to="CollectableManager/Godot" method="_on_Button_pressed"]
 [connection signal="timer_applied" from="CollectableManager/Godot" to="ProgressBar" method="_on_Godot_timer_applied"]

@@ -9,7 +9,7 @@
 [node name="Collectable" type="Area2D"]
 position = Vector2( 534, 302 )
 script = ExtResource( 1 )
-effect_value = -5
+effect_value = -4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 1, 0, 0, 1 )

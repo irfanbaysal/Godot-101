@@ -6,6 +6,7 @@ var speed = 400.0
 export var progressValueIncrementer : float
 export var progressValueMultiplier : float
 export var followSpeed : int
+var isAlive
 var progressedValue = 0	
 
 signal timer_applied(progressed_value)
@@ -15,6 +16,7 @@ func _init():
 # Ready	
 func _ready():
 	_useTimer()
+	_set_as_alive(true)
 	print_debug("Ready")
 func _enter_tree():
 	print_debug("Enter tree")
@@ -22,8 +24,8 @@ func _exit_tree():
 	print_debug("Exit tree")
 
 func _process(delta):
-	_applyInput(delta)
-	
+	_set_as_alive(progressedValue<100)
+
 func _applyInput(delta):
 	var direction = 0;
 	if(Input.is_action_pressed("ui_left")):
@@ -42,21 +44,18 @@ func _applyInput(delta):
 		velocity = Vector2.UP.rotated(rotation) * speed
 		
 	position += velocity*delta 
-	
-#func _input(event):
-#	if event is InputEventMouseMotion:
-#		position = get_viewport().get_mouse_position()
-		
 
 func _physics_process(delta):
-	var mouse_pos = get_viewport().get_mouse_position()
-	position = position.linear_interpolate(mouse_pos, delta * followSpeed)
+	if(isAlive): 
+		var mouse_pos = get_viewport().get_mouse_position()
+		position = position.linear_interpolate(mouse_pos, delta * followSpeed)
 	
 func _on_Button_pressed():
 	_refresh_progress_bar()
 	
 func _refresh_progress_bar():
 	progressedValue=0
+	progressValueIncrementer = 1
 	
 func _useTimer():
 	var timer = get_node("Timer")
@@ -67,7 +66,7 @@ func _on_apply_timeout():
 	progressedValue+=progressValueIncrementer
 	emit_signal("timer_applied",progressedValue)
 	_set_alpha()
-	print_debug(progressValueIncrementer)
+
 
 func _on_Collectable_collected(progressed_value):
 	progressedValue += progressed_value
@@ -86,5 +85,7 @@ func _scale_up_down():
 	tween.tween_interval(.15)
 	tween.tween_property(self,"scale",Vector2(1,1),.25)
 	tween.set_ease(Tween.EASE_IN_OUT)
-
 	
+func _set_as_alive(alive):
+	isAlive = alive
+
