@@ -24,9 +24,10 @@ func _add_new_ball(ball):
 func _on_Collectable_collected(progressed_value):
 	print_debug("Collected")
 	if new_ball:
-		sound_system._set_stream_and_play(0)
+		#sound_system._set_stream_and_play(0)
+		sound_system._set_stream_and_play_random()
 		new_ball.queue_free()
-		
+				
 	_create_collectable()
 
 func _set_godot():
