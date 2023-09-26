@@ -24,7 +24,7 @@ func _add_new_ball(ball):
 func _on_Collectable_collected(progressed_value):
 	print_debug("Collected")
 	if new_ball:
-		sound_system._playSound()
+		sound_system._set_stream_and_play(0)
 		new_ball.queue_free()
 		
 	_create_collectable()
