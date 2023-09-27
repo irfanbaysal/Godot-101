@@ -1,9 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Sounds/collect_0.wav" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/SoundSystem.gd" type="Script" id=2]
-[ext_resource path="res://Sounds/collect_1.wav" type="AudioStream" id=3]
+[ext_resource path="res://Scripts/sound_resource.tres" type="Resource" id=4]
 
 [node name="SoundSystem" type="AudioStreamPlayer2D"]
 script = ExtResource( 2 )
-soundArray = [ ExtResource( 1 ), ExtResource( 3 ) ]
+sound_resource = ExtResource( 4 )

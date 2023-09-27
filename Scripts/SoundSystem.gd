@@ -1,9 +1,9 @@
 extends AudioStreamPlayer2D
 
-export var soundArray : Array
+export var sound_resource : Resource
 
 func _set_stream_sound(sound_index):
-	stream = soundArray[sound_index]
+	stream = sound_resource.soundArray[sound_index]
 
 func _play_sound():
 	play()
@@ -20,8 +20,7 @@ func _stop_sound():
 	stop()	
 	
 func _select_random_sound():
-	var selected_random = randi() % (soundArray.size())
-	#print_debug(selected_random)
+	var selected_random = randi() % (sound_resource.soundArray.size())
 	return selected_random     
 
 
